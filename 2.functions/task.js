@@ -1,9 +1,20 @@
 // Задание 1
 function getArrayParams(arr) {
   let min, max, sum, avg;
+  
+  min = max = sum = arr[0];
 
-  // Ваш код
-
+  for (let i = 1; i < arr.length; i++) {
+    let x = arr[i];
+    if (x < min) {
+      min = x;
+    }
+    if (x > max) {
+      max = x;
+    }
+    sum += x;
+  }
+  avg = +(sum / arr.length).toFixed(2);
   return { min: min, max: max, avg: avg };
 }
 
@@ -11,7 +22,10 @@ function getArrayParams(arr) {
 function worker(arr) {
   let sum;
 
-  // Ваш код
+  sum = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    sum += arr[i];
+  }
 
   return sum;
 }
@@ -19,13 +33,29 @@ function worker(arr) {
 function makeWork(arrOfArr, func) {
   let max;
 
-  // Ваш кода
-  // for ...
+  max = func(arrOfArr[0])
+  for (let i = 1; i < arrOfArr.length; i++) {
+    let sum = func(arrOfArr[i]);
+    if (max < sum) {
+      max = sum;
+    }
+  }
   
   return max;
 }
 
 // Задание 3
 function worker2(arr) {
-  // Ваш код
+  let max, min;
+  max = min = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    let x = arr[i];
+    if (x < min) {
+      min = x;
+    }
+    if (x > max) {
+      max = x;
+    }
+  }
+  return Math.abs(max - min);
 }
