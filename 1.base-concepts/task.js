@@ -1,21 +1,17 @@
 "use strict";
 
 function solveEquation(a, b, c) {
-  let arr = new Array();
-  let d = b**2-4*a*c
-  console.log(`d=${d}`);
-  if ( d < 0 ) {
-    arr = [];
-  } else if (d === 0) {
-    arr[0] = - b / (2 * a);
-  } else if (d > 0) {
-    arr[0] = (-b+Math.sqrt(d))/(2*a);
-    arr[1] = (-b-Math.sqrt(d))/(2*a);
+  const d = b**2-4*a*c;
+  if (d < 0) {
+    return [];
   }
-  return arr; // array
+  if ( d === 0 ) {
+    return [ - b / (2 * a) ];
+  }
+  const x1 = (-b+Math.sqrt(d))/(2*a);
+  const x2 = (-b-Math.sqrt(d))/(2*a);
+  return [x1, x2];
 }
-
-// console.log(solveEquation(1.25, 5, 5));
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
@@ -24,26 +20,17 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   console.log(`amount = ${amount}`);
   console.log(`date = ${date}`);
 
-  // код для задачи №2 писать здесь
-  if (+percent >= 0) {
-    percent = +percent / 100;
-  } else {
+  if (isNaN(persent)) {
     return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
   }
-  if (+contribution >= 0) {
-    contribution = +contribution;
-  } else {
+  if (isNaN(contribution)) {
     return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
   }
-  if (+amount >= 0) {
-    amount = +amount;
-  } else {
+  if (isNaN(amount)) {
     return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
   }
   if (date == "Invalid Date") return `Параметр "Срок ипотеки" содержит неправильное значение ${date}`;
   if (date < new Date()) return "Введена прошедшая дата";
-  // Проконтролируйте корректность введенных данных.
-  // “Параметр <название параметра> содержит неправильное значение <значение параметра>”.
 
   let currentDate = new Date();
   let n = (date.getFullYear() - currentDate.getFullYear())*12 + date.getMonth() - currentDate.getMonth();
@@ -57,7 +44,5 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let monthlyPay = s * (p + (p / (((1 + p)**n) - 1)));
   console.log(`Ежемесячный платеж: ${monthlyPay}`);
 
-  totalAmount = Math.round(monthlyPay * n * 100)/100;
-  
-  return totalAmount;
+  return Math.round(monthlyPay * n * 100)/100;
 }
