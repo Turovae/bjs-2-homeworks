@@ -14,14 +14,14 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMark = function (mark) {
   if (!this.marks) {
-    this.marks = new Array();
+    this.marks = [];
   }
   this.marks.push(mark);
 }
 
 Student.prototype.addMarks = function (...arg) {
   if (!this.marks) {
-    this.marks = new Array();
+    this.marks = [];
   }
   this.marks.push(...arg);
 }
