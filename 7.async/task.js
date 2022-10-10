@@ -12,11 +12,7 @@ class AlarmClock {
             console.error('Будильник с таким id уже существует');
             return;
         }
-        this.alarmCollection.push({
-            id: id,
-            time: time,
-            callback: callback,
-        })
+        this.alarmCollection.push({id, time, callback})
     }
 
     removeClock(id) {
@@ -28,12 +24,13 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime() {
-        let currentTime = new Date();
-        let hours = currentTime.getHours();
-        hours = hours < 10 ? `0${hours}` : `${hours}`;
-        let mins = currentTime.getMinutes();
-        mins = mins < 10 ? `0${mins}` : `${mins}`;
-        return(`${hours}:${mins}`);
+        return ((new Date()).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}));
+        // let currentTime = new Date();
+        // let hours = currentTime.getHours();
+        // hours = hours < 10 ? `0${hours}` : `${hours}`;
+        // let mins = currentTime.getMinutes();
+        // mins = mins < 10 ? `0${mins}` : `${mins}`;
+        // return(`${hours}:${mins}`);
     }
 
     start() {
@@ -69,9 +66,7 @@ class AlarmClock {
     }
 
     clearAlarms() {
-        if (this.timerId) {
-            this.stop();
-        }
+        this.stop();
         this.alarmCollection = [];
     }
 }
@@ -80,9 +75,9 @@ class AlarmClock {
 //Пример использования класса AlarmClock
 let alarm = new AlarmClock();
 
-alarm.addClock("17:27", () => console.log("Будильник 1"), 1);
+alarm.addClock("14:07", () => console.log("Будильник 1"), 1);
 
-alarm.addClock("17:28", () => {
+alarm.addClock("14:08", () => {
     console.log("Будильник 2");
      alarm.removeClock(2);
     }, 2); 
@@ -91,7 +86,7 @@ alarm.addClock("17:28", () => {
 alarm.addClock("10:00", () => console.log("Будильник 4"), 1);
 alarm.printAlarms();
 
-alarm.addClock("17:29", () => {
+alarm.addClock("14:09", () => {
     console.log("Будильник 3");
     alarm.clearAlarms();
     alarm.printAlarms();
